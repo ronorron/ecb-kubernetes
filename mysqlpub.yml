@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: docker-mysql-pub
+    labels:
+        app: docker-mysql-pub
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: docker-mysql-pub
+    template:
+        metadata:
+            labels:
+                app: docker-mysql-pub
+        spec:
+          volumes:
+            - name: mysql-persistent-storage-1
+              persistentVolumeClaim:
+                  claimName: mysql-pvc-claim-1
+          containers:
+                - name: docker-mysql-pub
+                  image: mysql:5.7
+                  env:
+                    - name: MYSQL_DATABASE
+                      value: pubdb
+                    - name: MYSQL_ROOT_PASSWORD
+                      value: password
+                    - name: MYSQL_USER
+                      value: user
+                    - name: MYSQL_PASSWORD
+                      value: password
+                  volumeMounts:
+                    - name: mysql-persistent-storage-1
+                      mountPath: /var/lib/mysql

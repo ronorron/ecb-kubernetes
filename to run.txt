@@ -1,0 +1,3 @@
+create -f mysqlpv.yml,mysql.yml,mysqlpub.yml,mysqlsvc.yml,mysqlpubsvc.yml,ecb-backend.yml,ecb-backend-service.yml
+
+delete -f mysqlpv.yml,mysql.yml,mysqlpub.yml,mysqlsvc.yml,mysqlpubsvc.yml,ecb-backend.yml,ecb-backend-service.yml

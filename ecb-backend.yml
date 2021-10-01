@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: userreg
+    labels:
+        app: userreg
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: userreg
+    template:
+        metadata:
+            name: userreg
+            labels:
+                app: userreg
+        spec:
+            containers:
+                - name: userreg
+                  image: rounakdebnath/userreg
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: userauth
+    labels:
+        app: userauth
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: userauth
+    template:
+        metadata:
+            name: userauth
+            labels:
+                app: userauth
+        spec:
+            containers:
+                - name: userauth
+                  image: rounakdebnath/userauth
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: publication
+    labels:
+        app: publication
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: publication
+    template:
+        metadata:
+            name: publication
+            labels:
+                app: publication
+        spec:
+            containers:
+                - name: publication
+                  image: rounakdebnath/publication
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: getfiles
+    labels:
+        app: getfiles
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: getfiles
+    template:
+        metadata:
+            name: getfiles
+            labels:
+                app: getfiles
+        spec:
+            containers:
+                - name: getfiles
+                  image: rounakdebnath/getfiles
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2 
+kind: Deployment 
+metadata: 
+  name: ecb-frontend
+spec: 
+  selector: 
+    matchLabels: 
+      app: ecb-frontend 
+  replicas: 1 # tells deployment to run 2 pods matching the template 
+  template: 
+    metadata: 
+      labels: 
+        app: ecb-frontend 
+    spec: 
+      containers: 
+      - name: ecb-frontend 
+        image: rounakdebnath/ecb-frontend 
+

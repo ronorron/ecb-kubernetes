@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: docker-mysql
+    labels:
+        app: docker-mysql
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: docker-mysql
+    template:
+        metadata:
+            labels:
+                app: docker-mysql
+        spec:
+          volumes:
+            - name: mysql-persistent-storage
+              persistentVolumeClaim:
+                  claimName: mysql-pvc-claim
+          containers:
+                - name: docker-mysql
+                  image: mysql:5.7
+                  env:
+                    - name: MYSQL_DATABASE
+                      value: userjustdb
+                    - name: MYSQL_ROOT_PASSWORD
+                      value: password
+                    - name: MYSQL_USER
+                      value: user
+                    - name: MYSQL_PASSWORD
+                      value: password
+                  volumeMounts:
+                    - name: mysql-persistent-storage
+                      mountPath: /var/lib/mysql
